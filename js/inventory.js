@@ -24,6 +24,7 @@
             }
             
         $(document).on("pagecreate","#pagetwo",function(){
+            alert("At page two");
 		var theUrl = "request.php?cmd=2";
 
 			var obj=sendRequest(theUrl);
