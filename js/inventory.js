@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 //loading values to page one
+
             function login(){
                 
                 var userName = $("#username").val();
@@ -13,10 +14,10 @@
                 var obj5 = sendRequest(theUrl);
             
                 if(obj5.result==1){
-                    
-                    window.location.href="#pagetwo";
+                    window.location.replace("http://cs.ashesi.edu.gh/~csashesi/class2016/beatrice-lungahu/MobileWeb/AppPointofSale/#pagetwo");
                 }
                 else{
+                    alert("Invalid login");
        
                 }
 
