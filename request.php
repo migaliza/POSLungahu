@@ -85,6 +85,9 @@ switch($cmd)
 	   }
 	   echo "]}";
            
+           mysqli_query($link,"DELETE FROM MwebPoS WHERE Product_id='$productID'") or die (mysqli_error());
+          
+           
            
     break;
     case 4:
@@ -111,9 +114,10 @@ switch($cmd)
 	}
          $amountspend=(double)$totalAmountSpend;
         if($amountspend>=500){
+            echo $amountspend;
+            
             
             ob_start();
-            echo "discounting".$amountspend;
             $url = "https://api.smsgh.com/v3/messages/send?"
             . "From=BMI%20GENERAL%20TRADERS"
             . "&To=%2B$phoneNo"
@@ -153,5 +157,30 @@ switch($cmd)
 	}
         break;
         
+       case 6:
+        $DB_HOST="localhost";
+		$DB_NAME="csashesi_beatrice-lungahu";
+		$DB_USER="csashesi_bl16";
+		$DB_PWORD="db!hiJ35";
+		
+		$link = mysqli_connect($DB_HOST , $DB_USER, $DB_PWORD,$DB_NAME);
+		if($link==false){
+			echo "not succesfull";
+		}
+		
+                
+		$str_query="UPDATE * FROM  MwebPoS WHERE Product_id='$productID'";
+		$result=mysqli_query($link,$str_query);
+             $row=mysqli_fetch_assoc($result);
+        echo '{"result":1,"values":[';	//start of json object
+	   while($row){
+		  echo json_encode($row);			//convert the result array to json object
+		  $row=$result->fetch_assoc();
+		  if($row){
+			 echo ",";					//if there are more rows, add comma 
+		  }
+	   }
+	   echo "]}";
+    break;
 }
 ?>

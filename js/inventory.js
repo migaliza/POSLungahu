@@ -6,12 +6,14 @@
 //loading values to page one
 
             function login(){
-                
-                var userName = $("#username").val();
+                $("#login").click(function(ev){
+                    ev.preventDefault();
+                 var userName = $("#username").val();
                 var  password = $("#password").val();
                 var stringV = "username="+userName+"&password="+password;
-                var theUrl="request.php?cmd=5&"+stringV;
+                var theUrl="http://cs.ashesi.edu.gh/~csashesi/class2016/beatrice-lungahu/MobileWeb/AppPointofSale/request.php?cmd=5&"+stringV;
                 var obj5 = sendRequest(theUrl);
+                
             
                 if(obj5.result==1){
                     window.location.replace("http://cs.ashesi.edu.gh/~csashesi/class2016/beatrice-lungahu/MobileWeb/AppPointofSale/#pagetwo");
@@ -20,17 +22,18 @@
                     alert("Invalid login");
        
                 }
+                })
+                
 
             }
             
         $(document).on("pagecreate","#pagetwo",function(){
-            alert("At page two");
+            
 		var theUrl = "request.php?cmd=2";
 
 			var obj=sendRequest(theUrl);
 
 			if(obj.result==1){
-                            //alert(obj.result);
 
 			var row;
 			
@@ -38,8 +41,11 @@
 				row+="<li data-role='list-divider'  data-theme='d' data-divider-theme='a'>"+value.productName+"</li>"+
                                         "<li><p>"+"Barcode:"+"<strong>"+value.barcode+"</p>"+
                                         "<p>"+"Price: "+value.Price+"<p>"+
-                                        "<p>"+"Description: "+value.Desciption+"</p></li>"
+                                        "<p>"+"Description: "+value.Desciption+"</p><p id='productItem'></p></li>"
+         
 			});
+                        var btn = $('<input type="button" id="updatebtn" value="UPDATE"  />');
+                                $("#productItem").append(btn);
 
 			$("#inventory").append(row);
                         $("#inventory").listview("refresh");
@@ -181,5 +187,9 @@
                 $(function(){
                     saveInventory();
                 });
+                
+                $(function(){
+                    login();
+                })
 		
 
