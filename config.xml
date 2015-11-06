@@ -9,9 +9,10 @@
 		<description>
 			An app that is used at a point of sale
 		</description>
-		<author href="hVp://www.ashesi.edu.gh" email="migaliza.lyza@gmail.com">>
+		<author href="httpp://www.ashesi.edu.gh" email="migaliza.lyza@gmail.com">>
 			Beatrice Migaliza
 		</author>
+                <content src="index.html" />
 		<gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.2.0" />
 		<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 		<allow-navigation href="data:*" />
