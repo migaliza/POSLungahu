@@ -14,19 +14,13 @@ switch($cmd)
 	if($link==false){
             echo "not succesfull";
 	}
-		/*
-		if(mysqli_select_db($DB_NAME,$link)){
-			echo "echo can not select db";
-		}*/
-		
-		
-		//$new_date = date('yy-mm-dd',strtotime($_POST['Date']));
+
 	$barcode=$_REQUEST['barcode'];
 	$product = $_REQUEST['product'];
 	$price=$_REQUEST['price'];
-	$image=$_REQUEST['image'];
+	$description=$_REQUEST['Description'];
 		
-	$str_query="INSERT INTO MwebPoS (barcode,productName,price,image) VALUES('$barcode','$product','$price','$image')";
+	$str_query="INSERT INTO MwebPoS (barcode,productName,price,Desciption) VALUES('$barcode','$product','$price','$description')";
 
 	if(mysqli_query($link,$str_query)){
             echo '{"result":1,"message": "SUCCESFULLY ADDED"}';
@@ -50,9 +44,9 @@ switch($cmd)
 		}
 		
                 
-		$str_query="SELECT Product_id, productName,barcode,price FROM  MwebPoS";
+		$str_query="SELECT * FROM  MwebPoS";
 		$result=mysqli_query($link,$str_query);
-        $row=  mysqli_fetch_assoc($result);
+             $row=mysqli_fetch_assoc($result);
         echo '{"result":1,"values":[';	//start of json object
 	   while($row){
 		  echo json_encode($row);			//convert the result array to json object
@@ -76,11 +70,11 @@ switch($cmd)
 			echo "not succesfull";
 		}
 		$productID=$_REQUEST['Product_id'];
-                $str_query="SELECT productName,price FROM MwebPoS WHERE Product_id='$productID'";
+                $str_query="SELECT productName,Price FROM MwebPoS WHERE Product_id='$productID'";
                 
-		//$str_query="SELECT * FROM  MwebPointOfSale";
+		
 		$result=mysqli_query($link,$str_query);
-        $row=mysqli_fetch_assoc($result);
+                $row=mysqli_fetch_assoc($result);
         echo '{"result":1,"data":[';	//start of json object
 	   while($row){
 		  echo json_encode($row);			//convert the result array to json object
@@ -136,5 +130,28 @@ switch($cmd)
               
         }
         break;
+        
+    case 5:
+        $DB_HOST="localhost";
+	$DB_NAME="csashesi_beatrice-lungahu";
+	$DB_USER="csashesi_bl16";
+	$DB_PWORD="db!hiJ35";
+		
+	$link = mysqli_connect($DB_HOST , $DB_USER, $DB_PWORD,$DB_NAME);
+	if($link==false){
+		echo "not succesfull";
+	}
+        $username=$_REQUEST['username'];
+        $password=$_REQUEST['password'];
+        
+        $query = mysqli_query($link,"SELECT * from login WHERE password='$password' AND username='$username'");
+        if($query){
+            echo '{"result":1,"message": "SUCCESFULLY ADDED"}';
+	}else
+	{
+            echo '{"result":0,"message": "unsuccessful"}';
+	}
+        break;
+        
 }
 ?>
