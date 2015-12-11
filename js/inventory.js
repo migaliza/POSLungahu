@@ -16,7 +16,7 @@
                 
             
                 if(obj5.result==1){
-                    window.location.replace('http://cs.ashesi.edu.gh/~csashesi/class2016/beatrice-lungahu/MobileWeb/AppPointofSale/#pagetwo');
+                    window.location.replace('AppPointofSale/#pagetwo');
                     //window.location="http://cs.ashesi.edu.gh/~csashesi/class2016/beatrice-lungahu/MobileWeb/AppPointofSale/#pagetwo";
                 }
                 else{
